@@ -8,4 +8,10 @@ class AppTextStyles {
     fontSize: 50.0,
     fontWeight: FontWeight.w700,
   );
+
+  static const TextStyle mediumText = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 36.0,
+    fontWeight: FontWeight.w600,
+  );
 }
