@@ -1,3 +1,4 @@
+import 'package:financy_app/features/splashes/splash_page.dart';
 import 'package:flutter/material.dart';
 
 class FinancyApp extends StatelessWidget {
@@ -7,9 +8,7 @@ class FinancyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(body: Center(child: Text('Home'))),
-      ),
+      home: SplashPage(),
     );
   }
 }
