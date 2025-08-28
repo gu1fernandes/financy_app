@@ -8,4 +8,5 @@ class AppColors {
   static const List<Color> greenGradient = [greenlightOne, greenlightTwo];
   static const white = Color(0xffffffff);
   static const iceWhite = Color(0xffeef8f7);
+  static const greydark = Color(0xff44444444);
 }
