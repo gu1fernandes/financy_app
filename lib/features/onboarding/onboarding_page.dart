@@ -1,71 +1,70 @@
 import 'package:financy_app/common/constants/app_colors.dart';
-import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_text_styles.dart';
+import 'package:financy_app/common/constants/routes.dart';
+import 'package:financy_app/common/widgets/multi_text_button.dart';
+import 'package:financy_app/common/widgets/primary_button.dart';
+import 'package:flutter/material.dart';
 
-class OnBoardingPage extends StatelessWidget {
-  const OnBoardingPage({super.key});
+import '../../common/constants/constants.dart';
+
+class OnboardingPage extends StatelessWidget {
+  const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Align(
-          child: Column(
+    return Scaffold(
+      backgroundColor: AppColors.iceWhite,
+      body: Column(
+        children: [
+          const SizedBox(height: 48.0),
+          Expanded(child: Image.asset('assets/images/onboarding.png')),
+          Text(
+            'Gaste com inteligência',
+            textAlign: TextAlign.center,
+            style: AppTextStyles.mediumText.copyWith(
+              color: AppColors.greenlightOne,
+            ),
+          ),
+          Text(
+            'Economize mais',
+            textAlign: TextAlign.center,
+            style: AppTextStyles.mediumText.copyWith(
+              color: AppColors.greenlightOne,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 32.0,
+              right: 32.0,
+              top: 16.0,
+              bottom: 4.0,
+            ),
+            child: PrimaryButton(
+              key: Keys.onboardingGetStartedButton,
+              text: 'Começar',
+              onPressed: () {
+                Navigator.pushNamed(context, NamedRoute.signUp);
+              },
+            ),
+          ),
+          MultiTextButton(
+            key: Keys.onboardingAlreadyHaveAccountButton,
+            onPressed: () => Navigator.pushNamed(context, NamedRoute.signIn),
             children: [
-              SizedBox(height: 60.0),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  color: AppColors.iceWhite,
-                  child: Image.asset('assets/images/man.png'),
-                ),
+              Text(
+                'Já possui uma conta? ',
+                style: AppTextStyles.smallText.copyWith(color: AppColors.grey),
               ),
               Text(
-                'Gaste com inteligência',
-                style: AppTextStyles.mediumText.copyWith(
-                  color: AppColors.greenlightTwo,
-                ),
-              ),
-              Text(
-                'Economize mais',
-                style: AppTextStyles.mediumText.copyWith(
-                  color: AppColors.greenlightTwo,
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 56.0,
-                  width: 150.0,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: AppColors.greenGradient,
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(38.0)),
-                  ),
-                  child: Text(
-                    'Criar Conta',
-                    style: AppTextStyles.mediumText.copyWith(
-                      color: AppColors.white,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                'Já possui uma conta? Log In',
+                'Entrar ',
                 style: AppTextStyles.smallText.copyWith(
-                  color: AppColors.greydark,
+                  color: AppColors.greenlightOne,
                 ),
               ),
-              SizedBox(height: 60.0),
             ],
           ),
-        ),
+          const SizedBox(height: 24.0),
+        ],
       ),
     );
   }

@@ -2,5 +2,5 @@ import 'package:financy_app/app.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const FinancyApp());
+  runApp(const App());
 }
