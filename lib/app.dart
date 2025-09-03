@@ -3,7 +3,6 @@ import 'package:financy_app/features/sign_up_/sign_up_page.dart';
 import 'package:financy_app/features/splashes/splash_page.dart';
 import 'package:flutter/material.dart';
 
-import 'common/constants/constants.dart';
 import 'features/onboarding/onboarding_page.dart';
 
 class App extends StatelessWidget {

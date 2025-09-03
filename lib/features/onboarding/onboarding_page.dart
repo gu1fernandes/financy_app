@@ -12,59 +12,64 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.iceWhite,
-      body: Column(
-        children: [
-          const SizedBox(height: 48.0),
-          Expanded(child: Image.asset('assets/images/onboarding.png')),
-          Text(
-            'Gaste com inteligência',
-            textAlign: TextAlign.center,
-            style: AppTextStyles.mediumText.copyWith(
-              color: AppColors.greenlightOne,
-            ),
-          ),
-          Text(
-            'Economize mais',
-            textAlign: TextAlign.center,
-            style: AppTextStyles.mediumText.copyWith(
-              color: AppColors.greenlightOne,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 32.0,
-              right: 32.0,
-              top: 16.0,
-              bottom: 4.0,
-            ),
-            child: PrimaryButton(
-              key: Keys.onboardingGetStartedButton,
-              text: 'Começar',
-              onPressed: () {
-                Navigator.pushNamed(context, NamedRoute.signUp);
-              },
-            ),
-          ),
-          MultiTextButton(
-            key: Keys.onboardingAlreadyHaveAccountButton,
-            onPressed: () => Navigator.pushNamed(context, NamedRoute.signIn),
-            children: [
-              Text(
-                'Já possui uma conta? ',
-                style: AppTextStyles.smallText.copyWith(color: AppColors.grey),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.iceWhite,
+        body: Column(
+          children: [
+            const SizedBox(height: 48.0),
+            Expanded(child: Image.asset('assets/images/onboarding.png')),
+            Text(
+              'Gaste com inteligência',
+              textAlign: TextAlign.center,
+              style: AppTextStyles.mediumText.copyWith(
+                color: AppColors.greenlightOne,
               ),
-              Text(
-                'Entrar ',
-                style: AppTextStyles.smallText.copyWith(
-                  color: AppColors.greenlightOne,
+            ),
+            Text(
+              'Economize mais',
+              textAlign: TextAlign.center,
+              style: AppTextStyles.mediumText.copyWith(
+                color: AppColors.greenlightOne,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 32.0,
+                right: 32.0,
+                top: 16.0,
+                bottom: 4.0,
+              ),
+              child: PrimaryButton(
+                key: Keys.onboardingGetStartedButton,
+                text: 'Começar',
+                onPressed: () {
+                  Navigator.pushNamed(context, NamedRoute.signUp);
+                },
+              ),
+            ),
+            MultiTextButton(
+              key: Keys.onboardingAlreadyHaveAccountButton,
+              onPressed:
+                  () {}, //() => Navigator.pushNamed(context, NamedRoute.signIn),
+              children: [
+                Text(
+                  'Já possui uma conta? ',
+                  style: AppTextStyles.smallText.copyWith(
+                    color: AppColors.grey,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 24.0),
-        ],
+                Text(
+                  'Entrar ',
+                  style: AppTextStyles.smallText.copyWith(
+                    color: AppColors.greenlightOne,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24.0),
+          ],
+        ),
       ),
     );
   }

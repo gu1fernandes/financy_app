@@ -7,19 +7,23 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: AppColors.greenGradient,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: AppColors.greenGradient,
+            ),
           ),
-        ),
-        child: Text(
-          'financy',
-          style: AppTextStyles.bigText.copyWith(color: Colors.white),
+          child: Column(
+            children: [
+              Image.asset('assets/images/logo.png'),
+              Text('financy', style: AppTextStyles.mediumText),
+            ],
+          ),
         ),
       ),
     );
