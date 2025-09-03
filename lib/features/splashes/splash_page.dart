@@ -18,11 +18,18 @@ class SplashPage extends StatelessWidget {
               colors: AppColors.greenGradient,
             ),
           ),
-          child: Column(
-            children: [
-              Image.asset('assets/images/logo.png'),
-              Text('financy', style: AppTextStyles.mediumText),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/images/logowhite.png', height: 120.0),
+                Text(
+                  'financy',
+                  style: AppTextStyles.bigText.copyWith(color: AppColors.white),
+                ),
+              ],
+            ),
           ),
         ),
       ),

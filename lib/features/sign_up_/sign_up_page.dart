@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/constants.dart';
+import 'package:financy_app/common/widgets/custom_text_form_field.dart';
 import 'package:financy_app/common/widgets/multi_text_button.dart';
 import 'package:financy_app/common/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -15,23 +16,32 @@ class SignUpPage extends StatelessWidget {
       child: Scaffold(
         body: ListView(
           children: [
+            const SizedBox(height: 48.0),
             Text(
-              'Gaste com inteligência',
+              'Comece a economizar',
               textAlign: TextAlign.center,
-              style: AppTextStyles.mediumText.copyWith(
+              style: AppTextStyles.mediumText36.copyWith(
                 color: AppColors.greenlightOne,
               ),
             ),
             Text(
-              'Economize mais',
+              'seu dinheiro!',
               textAlign: TextAlign.center,
-              style: AppTextStyles.mediumText.copyWith(
+              style: AppTextStyles.mediumText36.copyWith(
                 color: AppColors.greenlightOne,
               ),
             ),
             Image.asset('assets/images/sign_up.png'),
-            TextFormField(),
-            const TextField(),
+            Form(
+              child: Column(
+                children: [
+                  CustomTextFormField(
+                    labelText: 'seu nome',
+                    hintText: 'digite seu nome',
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 left: 32.0,
