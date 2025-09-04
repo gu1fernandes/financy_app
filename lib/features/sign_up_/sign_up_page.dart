@@ -4,6 +4,7 @@ import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/constants.dart';
 import 'package:financy_app/common/widgets/custom_text_form_field.dart';
 import 'package:financy_app/common/widgets/multi_text_button.dart';
+import 'package:financy_app/common/widgets/password_form_field.dart';
 import 'package:financy_app/common/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,14 @@ class SignUpPage extends StatelessWidget {
                   CustomTextFormField(
                     labelText: 'seu nome',
                     hintText: 'digite seu nome',
+                  ),
+                  PasswordFormField(
+                    labelText: 'digite sua senha',
+                    hintText: '********',
+                  ),
+                  PasswordFormField(
+                    labelText: 'confirme sua senha',
+                    hintText: '********',
                   ),
                 ],
               ),
