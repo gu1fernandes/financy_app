@@ -25,22 +25,26 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Scaffold(
         body: ListView(
           children: [
-            const SizedBox(height: 48.0),
+            const SizedBox(height: 30.0),
             Text(
-              'Comece a economizar',
+              'Comece a usar',
               textAlign: TextAlign.center,
               style: AppTextStyles.mediumText36.copyWith(
-                color: AppColors.greenlightOne,
+                color: AppColors.greenlightTwo,
               ),
             ),
             Text(
-              'seu dinheiro!',
+              'o seu dinheiro!',
               textAlign: TextAlign.center,
               style: AppTextStyles.mediumText36.copyWith(
-                color: AppColors.greenlightOne,
+                color: AppColors.greenlightTwo,
               ),
             ),
-            Image.asset('assets/images/sign_up.png'),
+            SizedBox(
+              width: 480,
+              height: 180,
+              child: Image.asset('assets/images/sign_up.png'),
+            ),
             Form(
               key: _formKey,
               child: Column(
@@ -76,6 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null;
                     },
+                    helperText: "A senha deve ter no mínimo 8 caracteres",
                   ),
                   PasswordFormField(
                     labelText: 'confirme sua senha',
@@ -86,6 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null;
                     },
+                    helperText: "",
                   ),
                 ],
               ),

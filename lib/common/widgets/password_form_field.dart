@@ -15,6 +15,7 @@ class PasswordFormField extends StatefulWidget {
   final Widget? suffixIcon;
   final TextInputAction? textInputAction;
   final String? Function(String?)? validator;
+  final String? helperText;
 
   PasswordFormField({
     Key? key,
@@ -29,6 +30,7 @@ class PasswordFormField extends StatefulWidget {
     this.obscureText,
     this.suffixIcon,
     this.validator,
+    this.helperText,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      helperText: widget.helperText,
       validator: widget.validator,
       obscureText: isHidden,
       controller: widget.controller,
