@@ -14,8 +14,10 @@ class PasswordFormField extends StatefulWidget {
   final bool? obscureText;
   final Widget? suffixIcon;
   final TextInputAction? textInputAction;
-  const PasswordFormField({
-    super.key,
+  final String? Function(String?)? validator;
+
+  PasswordFormField({
+    Key? key,
     this.hintText,
     this.labelText,
     this.textCapitalization,
@@ -26,7 +28,8 @@ class PasswordFormField extends StatefulWidget {
     this.textInputAction,
     this.obscureText,
     this.suffixIcon,
-  });
+    this.validator,
+  }) : super(key: key);
 
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();
@@ -38,6 +41,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      validator: widget.validator,
       obscureText: isHidden,
       controller: widget.controller,
       hintText: widget.hintText,

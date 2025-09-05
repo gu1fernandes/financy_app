@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/app_text_styles.dart';
@@ -10,22 +11,26 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? padding;
   final int? maxLength;
-  final TextInputAction? textInputAction;
   final bool? obscureText;
   final Widget? suffixIcon;
+  final TextInputAction? textInputAction;
+  final List<TextInputFormatter>? inputFormatters;
+  final FormFieldValidator<String>? validator;
 
   const CustomTextFormField({
     super.key,
-    this.padding,
     this.hintText,
     this.labelText,
     this.textCapitalization,
     this.controller,
     this.keyboardType,
+    this.padding,
     this.maxLength,
     this.textInputAction,
     this.obscureText,
     this.suffixIcon,
+    this.validator,
+    this.inputFormatters,
   });
 
   @override
@@ -44,6 +49,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           widget.padding ??
           const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
       child: TextFormField(
+        validator: widget.validator,
+        style: AppTextStyles.inputText.copyWith(color: AppColors.greenlightOne),
+        inputFormatters: widget.inputFormatters,
         obscureText: widget.obscureText ?? false,
         textInputAction: widget.textInputAction,
         maxLength: widget.maxLength,
