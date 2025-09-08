@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/constants.dart';
 import 'package:financy_app/common/utils/uppercase_text_formatter.dart';
+import 'package:financy_app/common/utils/validator.dart';
 import 'package:financy_app/common/widgets/custom_text_form_field.dart';
 import 'package:financy_app/common/widgets/multi_text_button.dart';
 import 'package:financy_app/common/widgets/password_form_field.dart';
@@ -18,6 +19,8 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,47 +54,31 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   CustomTextFormField(
                     labelText: 'seu nome',
-                    hintText: 'digite seu nome',
+                    hintText: 'Ex:Gerônimo Belchior Aguiar',
                     inputFormatters: [UppercaseTextFormatter()],
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return 'Por favor, insira seu nome';
-                      }
-                      return null;
-                    },
+                    validator: Validator.validateName,
                   ),
                   CustomTextFormField(
                     labelText: 'seu email',
-                    hintText: 'geronimo@email.com',
+                    hintText: 'Ex:geronimo@email.com',
                     inputFormatters: [UppercaseTextFormatter()],
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return 'Por favor, insira seu nome';
-                      }
-                      return null;
-                    },
+                    validator: Validator.validateEmail,
                   ),
                   PasswordFormField(
+                    controller: _passwordController,
                     labelText: 'digite sua senha',
-                    hintText: '********',
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return 'Por favor, insira seu nome';
-                      }
-                      return null;
-                    },
-                    helperText: "A senha deve ter no mínimo 8 caracteres",
+                    hintText: 'Ex:Senha123!',
+                    validator: Validator.validatePassword,
+                    helperText:
+                        "A senha deve ter no mínimo 8 caracteres, incluindo letras maiúsculas, minúsculas e números.",
                   ),
                   PasswordFormField(
                     labelText: 'confirme sua senha',
-                    hintText: '********',
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return 'Por favor, insira seu nome';
-                      }
-                      return null;
-                    },
-                    helperText: "",
+                    hintText: 'Ex:Senha123!',
+                    validator: (value) => Validator.validateConfirmPassword(
+                      value,
+                      _passwordController.text,
+                    ),
                   ),
                 ],
               ),
@@ -138,5 +125,12 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  String? validateName(value) {
+    if (value != null && value.isEmpty) {
+      return 'Por favor, insira seu nome';
+    }
+    return null;
   }
 }

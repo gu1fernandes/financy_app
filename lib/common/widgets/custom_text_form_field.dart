@@ -80,9 +80,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         textCapitalization:
             widget.textCapitalization ?? TextCapitalization.none,
         decoration: InputDecoration(
-          helperText: widget.helperText,
+          helperText: _helperText,
           helperStyle: AppTextStyles.smallText,
           helperMaxLines: 3,
+          errorMaxLines: 3,
           suffixIcon: widget.suffixIcon,
           labelText: widget.labelText?.toUpperCase(),
           hintText: widget.hintText,
