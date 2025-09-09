@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'sign_up_state.dart';
+import 'package:financy_app/features/sign_up_/sign_up_state.dart';
 import 'package:flutter/foundation.dart';
 
 class SignUpController extends ChangeNotifier {
   SignUpState _state = SignUpInitialState();
+
   SignUpState get state => _state;
 
   void _changeState(SignUpState newState) {
@@ -14,13 +14,16 @@ class SignUpController extends ChangeNotifier {
 
   Future<bool> doSignUp() async {
     _changeState(SignUpLoadingState());
+
     try {
       await Future.delayed(const Duration(seconds: 2));
-      log("Conta criada com sucesso!");
+
+      // throw Exception("Erro ao logar");
+      log("usuario criado com sucesso");
+
       _changeState(SignUpSuccessState());
       return true;
     } catch (e) {
-      log("Erro ao criar conta: $e");
       _changeState(SignUpErrorState("Erro ao criar conta. Tente novamente."));
       return false;
     }

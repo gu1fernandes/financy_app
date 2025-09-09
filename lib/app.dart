@@ -1,9 +1,8 @@
 import 'package:financy_app/common/constants/routes.dart';
+import 'package:financy_app/features/onboarding/onboarding_page.dart';
 import 'package:financy_app/features/sign_up_/sign_up_page.dart';
 import 'package:financy_app/features/splashes/splash_page.dart';
 import 'package:flutter/material.dart';
-
-import 'features/onboarding/onboarding_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:financy_app/common/widgets/custom_circular_progress_indicator.dart';
+import 'package:financy_app/common/widgets/custom_botttom_sheet.dart';
 import 'package:financy_app/features/sign_up_/sign_up_controller.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/constants.dart';
@@ -9,6 +11,7 @@ import 'package:financy_app/common/widgets/multi_text_button.dart';
 import 'package:financy_app/common/widgets/password_form_field.dart';
 import 'package:financy_app/common/widgets/primary_button.dart';
 import 'package:financy_app/features/sign_up_/sign_up_state.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -26,6 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void dispose() {
     _passwordController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -37,14 +41,12 @@ class _SignUpPageState extends State<SignUpPage> {
       if (_controller.state is SignUpLoadingState) {
         showDialog(
           context: context,
-          barrierDismissible: false,
-          builder: (context) => Center(child: CircularProgressIndicator()),
+          builder: (context) => const CustomCircularProgressIndicator(),
         );
       }
 
       if (_controller.state is SignUpSuccessState) {
-        // Hide loading indicator
-
+        Navigator.pop(context);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -54,20 +56,8 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       }
       if (_controller.state is SignUpErrorState) {
-        // Hide loading indicator
         Navigator.pop(context);
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Erro'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
+        customModalBottomSheet(context);
       }
     });
   }
@@ -111,7 +101,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   CustomTextFormField(
                     labelText: 'seu email',
                     hintText: 'Ex:geronimo@email.com',
-                    inputFormatters: [UppercaseTextFormatter()],
                     validator: Validator.validateEmail,
                   ),
                   PasswordFormField(
@@ -133,6 +122,31 @@ class _SignUpPageState extends State<SignUpPage> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(
+                      text: 'Ao se inscrever, você concorda com nossos ',
+                    ),
+                    TextSpan(
+                      text: 'Termos',
+                      style: AppTextStyles.smallText.copyWith(
+                        color: AppColors.darkGrey,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Feedback.forTap(context);
+                        },
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.center,
+                style: AppTextStyles.smallText.copyWith(color: AppColors.grey),
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.only(
                 left: 32.0,
@@ -175,12 +189,5 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
-  }
-
-  String? validateName(value) {
-    if (value != null && value.isEmpty) {
-      return 'Por favor, insira seu nome';
-    }
-    return null;
   }
 }
