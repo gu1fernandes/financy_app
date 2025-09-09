@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:financy_app/features/sign_up_/sign_up_controller.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/common/constants/constants.dart';
 import 'package:financy_app/common/utils/uppercase_text_formatter.dart';
@@ -8,6 +8,7 @@ import 'package:financy_app/common/widgets/custom_text_form_field.dart';
 import 'package:financy_app/common/widgets/multi_text_button.dart';
 import 'package:financy_app/common/widgets/password_form_field.dart';
 import 'package:financy_app/common/widgets/primary_button.dart';
+import 'package:financy_app/features/sign_up_/sign_up_state.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -20,7 +21,56 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+  final _controller = SignUpController();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      log(_controller.state.toString());
+      if (_controller.state is SignUpLoadingState) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => Center(child: CircularProgressIndicator()),
+        );
+      }
+
+      if (_controller.state is SignUpSuccessState) {
+        // Hide loading indicator
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                const Scaffold(body: Center(child: Text("new page"))),
+          ),
+        );
+      }
+      if (_controller.state is SignUpErrorState) {
+        // Hide loading indicator
+        Navigator.pop(context);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Erro'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       _formKey.currentState != null &&
                       _formKey.currentState!.validate();
                   if (valid) {
-                    log("continuar a lógica de criação de conta");
+                    _controller.doSignUp();
                   } else {
                     log("erro de login");
                   }
